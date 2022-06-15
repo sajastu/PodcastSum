@@ -9,7 +9,7 @@ from search.beam import beam_search
 from utility import load_from_pkl
 
 
-def get_data(config, log, mode='test'):
+def get_data(config, log, mode='val'):
     print(f"get_data {mode}")
     tokenizer = MyTokenizer(config)
     valid_set = Dataset(

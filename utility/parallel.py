@@ -151,6 +151,7 @@ class DataParallelCriterion(DataParallel):
         if len(self.device_ids) == 1:
             return self.module(inputs, *targets[0], **kwargs[0])
         replicas = self.replicate(self.module, self.device_ids[:len(inputs)])
+        # import pdb;pdb.set_trace()
         outputs = _criterion_parallel_apply(replicas, inputs, targets, kwargs)
         #return Reduce.apply(*outputs) / len(outputs)
         #return self.gather(outputs, self.output_device).mean()
@@ -186,12 +187,17 @@ def _criterion_parallel_apply(modules, inputs, targets, kwargs_tup=None, devices
                     input = (input,)
                 if not isinstance(target, (list, tuple)):
                     target = (target,)
+                # import pdb;
+                # pdb.set_trace()
+
                 output = module(*(input + target), **kwargs)
             with lock:
                 results[i] = output
         except Exception as e:
             with lock:
                 results[i] = e
+            import traceback
+            traceback.print_exc()
             raise ValueError('Exception Detected')
 
     if len(modules) > 1:

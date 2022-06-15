@@ -4,13 +4,13 @@
   "Parts": {
     "train": {
       "name": "train",
-      "path": "/disk1/sajad/datasets/meetings/qmsum/train.jsonl",
+      "path": "/sensei-fs/users/sotudehg/datasets/qmsum/train.jsonl",
       "sorted": true,
       "shuffled": false
     },
     "test": {
       "name": "test",
-      "path": "/disk1/sajad/datasets/meetings/qmsum/test.jsonl",
+      "path": "/sensei-fs/users/sotudehg/datasets/qmsum/test.jsonl",
       "sorted": false,
       "shuffled": false
     },
@@ -29,7 +29,7 @@
     "valid":
     {
       "name": "valid",
-      "path": "/disk1/sajad/datasets/meetings/qmsum/val.jsonl",
+      "path": "/sensei-fs/users/sotudehg/datasets/qmsum/val.jsonl",
       "sorted": false,
       "shuffled": false
     }

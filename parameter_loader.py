@@ -52,7 +52,7 @@ def arg_loader():
     parser.add_argument('--amp', action='store_true', help="Whether or not to use amp during trianing")
     parser.add_argument('--parallel', action='store_true')
     parser.add_argument('--device', type=int, default=0)
-    parser.add_argument('--n_workers', type=int, default=2)
+    parser.add_argument('--n_workers', type=int, default=1)
 
     """
         Data Source: dataset/raw
@@ -106,7 +106,7 @@ def arg_loader():
             Extractor
     """
     # Save Path
-    parser.add_argument('--main_path', type=str, default='./model')
+    parser.add_argument('--main_path', type=str, default='/sensei-fs/users/sotudehg/saved_models/PodcastSum/')
     parser.add_argument('--abs_path', type=str, default='/abs')
     parser.add_argument('--ext_path', type=str, default='/ext')
     parser.add_argument('--swh_path', type=str, default='/swh')
@@ -159,7 +159,7 @@ def arg_loader():
             save each epoch: for restore training (usually no need)
     """
     parser.add_argument('--max_epoch', type=int, default=20)
-    parser.add_argument('--batch_size', type=int, default=1)
+    parser.add_argument('--batch_size', type=int, default=2)
     parser.add_argument('--checkPoint_Min', type=int, default=0)
     parser.add_argument('--checkPoint_Freq', type=int, default=100)
     parser.add_argument('--save_each_epoch', action="store_true")

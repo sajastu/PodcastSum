@@ -232,6 +232,9 @@ def train_ext(config, log):
         log.log("Batch Shuffled")
         for batch_idx, batch_data in enumerate(train_set):
             start_time = time.time()
+            # import pdb;pdb.set_trace()
+
+
             padded_batch_chunk_hidden, batch_scores, padded_batch_chunk_attention_mask = \
                 prepare_data_cuda(batch_data, config, h=h)
 
@@ -244,6 +247,7 @@ def train_ext(config, log):
                 chunk_attention_mask=padded_batch_chunk_attention_mask
             )
 
+            # import pdb;pdb.set_trace()
             loss = loss_func(predicts, labels, mask).sum() / mask.sum()
 
             backward(loss=loss, optimizer=optimizer, scheduler=scheduler, scaler=scaler if config.amp else None)
