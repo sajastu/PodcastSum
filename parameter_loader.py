@@ -35,7 +35,7 @@ def arg_loader():
     parser.add_argument('--mini', action="store_true")
     parser.add_argument('--T_p', type=int, default=25)
 
-    parser.add_argument('--Th', type=float, default=0.5)
+    parser.add_argument('--T', type=float, default=0.5)
     parser.add_argument('--cls_dim', type=int, default=256)
 
     parser.add_argument('--topk', type=int, default=3)
@@ -78,8 +78,8 @@ def arg_loader():
 
     # Truncated
     parser.add_argument('--input_limit', type=int, default=65536)
-    parser.add_argument('--output_limit', type=int, default=128)
-    parser.add_argument('--output_sent_limit', type=int, default=8)
+    parser.add_argument('--output_limit', type=int, default=256)
+    parser.add_argument('--output_sent_limit', type=int, default=16)
 
     # Constrain
     parser.add_argument('--n_overlap_constrain', type=int, default=3)
@@ -233,11 +233,11 @@ def arg_loader():
     # args.triGramTrick = not args.no_triGramTrick
 
     # Threshold
-    if args.mode == "ext" and (args.do_train or args.do_test):
-        name = "parts_" + str(args.kernel_size) + "_" + str(args.stride) + "_" + args.window_type + ".pt"
-        parts = torch.load(name)
-        args.T = list(parts.values())[args.T_p // 5 - 1]
-        print(args.T)
+    # if args.mode == "ext" and (args.do_train or args.do_test):
+    #     name = "parts_" + str(args.kernel_size) + "_" + str(args.stride) + "_" + args.window_type + ".pt"
+    #     parts = torch.load(name)
+    #     args.T = list(parts.values())[args.T_p // 5 - 1]
+    #     print(args.T)
 
     # print(args)
     return args

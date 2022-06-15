@@ -33,7 +33,7 @@ def prepare_data_cuda(batch_data, config, func=None):
 
 
 def offline(config, log):
-    __, valid_set = get_data(config, log, mode="test")
+    __, valid_set = get_data(config, log, mode="train")
 
     net = TokenLevelEncoder(config).cuda(config.device)
     if config.parallel:
@@ -68,5 +68,5 @@ def offline(config, log):
             h[idx] = hiddens_np[i][:l, :]
 
         print(batch_idx + 1, hiddens_np.shape, batch_indices, (time.time() - st))
-    name = "hidden_v_"+str(config.kernel_size)+"_"+str(config.stride)+"_"+config.window_type+".pkl"
+    name = "hidden_"+str(config.kernel_size)+"_"+str(config.stride)+"_"+config.window_type+"_align.pkl"
     save_to_pkl(name, h)

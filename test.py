@@ -10,10 +10,10 @@ from utility import load_from_pkl
 
 
 def get_data(config, log, mode='test'):
-    print("get_data test")
+    print(f"get_data {mode}")
     tokenizer = MyTokenizer(config)
     valid_set = Dataset(
-        name=config.test,
+        name=config.train,
         len_func=lambda x: sum(len(it) for it in x[0]),
         config=config,
         tokenizer=tokenizer,

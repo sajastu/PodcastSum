@@ -5,7 +5,7 @@ import numpy as np
 import torch
 import torch.utils.data as Data
 
-from utility import load_from_pkl, save_to_pkl, apply_filter
+from utility import load_from_pkl, save_to_pkl, apply_filter, get_sentences
 
 
 class MyDataset(Data.Dataset):
@@ -123,7 +123,6 @@ class MyDataset(Data.Dataset):
             return self.batch[self.batch_idx[index]]
         return self.prepare_func(self.batch[self.batch_idx[index]])
 
-
 class Podcasts(MyDataset):
     def __init__(self, name, len_func, tokenizer, config, log, mode='train', prepare_func=None):
         super(Podcasts, self).__init__(name, len_func, config, log, mode, prepare_func)
@@ -165,7 +164,7 @@ class Podcasts(MyDataset):
         return new_inputs
 
     def load(self):
-        input_file = open(self.path + ".json", "r", encoding='utf-8')
+        input_file = open(self.path, "r", encoding='utf-8')
         data = []
 
         f = open(self.name + "_example.txt", "w")
@@ -174,9 +173,9 @@ class Podcasts(MyDataset):
             if self.mini and (index >= 5000):
                 break
             data_i = json.loads(line)
-            idx = data_i["episode_uri"]
-            inputs_ = data_i["input"]
-            outputs_ = data_i["output"]
+            idx = f'meeting_{self.path.split("/")[-1].replace(".jsonl", "")}_{index}'
+            inputs_ = [s['content'] for s in data_i["meeting_transcripts"]]
+            outputs_ = get_sentences(data_i["general_query_list"][0]["answer"]) # give the general summary
 
             inputs = [self.tokenizer.encode(seg) for seg in inputs_]
             outputs = [self.tokenizer.encode(seq) for seq in outputs_]
@@ -207,5 +206,8 @@ class Podcasts(MyDataset):
 
             data.append([inputs, outputs, idx])
 
+
         f.close()
+
+
         return len(data), data

@@ -3,7 +3,8 @@ import pickle
 import shutil
 
 import torch
-
+import spacy
+nlp = spacy.load("en_core_web_sm")
 
 # IO
 def load_from_json(filename):
@@ -51,3 +52,10 @@ def save_check_point(state, is_best, path='.model', file_name='latest.pth.tar', 
         if is_best:
             shutil.copyfile(name, path + '/' + mode + '_model_best.pth.tar')
             shutil.copyfile(name, path + '/' + mode + '_model_best_epoch_' + str(state['epoch']) + '.pth.tar')
+
+def get_sentences(text):
+    doc_nlp = nlp(text)
+    ret = []
+    for sent in doc_nlp.sents:
+        ret.append(sent.text)
+    return ret

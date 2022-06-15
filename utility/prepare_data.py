@@ -302,7 +302,6 @@ def calculate_n_gram_overlap_sent(batch_chunks, batch_refs):
 
 def pick_golden_chunks(batch_chunks, batch_refs, require_batch_qualify=False):
     batch_n_gram_overlap = calculate_n_gram_overlap_sent(batch_chunks, batch_refs)
-
     ret = []
     if require_batch_qualify:
         ret_qualify = []

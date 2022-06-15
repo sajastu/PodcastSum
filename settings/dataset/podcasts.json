@@ -4,13 +4,13 @@
   "Parts": {
     "train": {
       "name": "train",
-      "path": "./podcasts_train",
+      "path": "/disk1/sajad/datasets/meetings/qmsum/train.jsonl",
       "sorted": true,
       "shuffled": false
     },
     "test": {
       "name": "test",
-      "path": "./podcasts_test1027",
+      "path": "/disk1/sajad/datasets/meetings/qmsum/test.jsonl",
       "sorted": false,
       "shuffled": false
     },
@@ -29,7 +29,7 @@
     "valid":
     {
       "name": "valid",
-      "path": "./podcasts_valid",
+      "path": "/disk1/sajad/datasets/meetings/qmsum/val.jsonl",
       "sorted": false,
       "shuffled": false
     }
